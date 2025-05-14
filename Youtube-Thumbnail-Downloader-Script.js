@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
   const downloadBtn = document.getElementById('download-btn');
   const closeBtn = document.querySelector('.close');
   
+  let currentDownloadUrl = '';
+  
   // Get thumbnails function
   getBtn.addEventListener('click', function() {
     const url = urlInput.value.trim();
@@ -35,6 +37,19 @@ document.addEventListener('DOMContentLoaded', function() {
     if (e.target === modal) {
       modal.style.display = 'none';
     }
+  });
+  
+  // Download button functionality
+  downloadBtn.addEventListener('click', function() {
+    if (!currentDownloadUrl) return;
+    
+    // Create temporary anchor tag for download
+    const link = document.createElement('a');
+    link.href = currentDownloadUrl;
+    link.download = `youtube-thumbnail-${new Date().getTime()}.jpg`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   });
   
   function extractVideoId(url) {
@@ -76,8 +91,7 @@ document.addEventListener('DOMContentLoaded', function() {
       item.addEventListener('click', function() {
         modal.style.display = 'block';
         modalImg.src = thumb.url;
-        downloadBtn.href = thumb.url;
-        downloadBtn.download = `youtube-thumb-${videoId}-${thumb.quality.replace(' ', '-')}.jpg`;
+        currentDownloadUrl = thumb.url;
       });
     });
   }
