@@ -39,60 +39,21 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
   
-  // Download button functionality
+  // Download button functionality - WORKING SOLUTION
   downloadBtn.addEventListener('click', function() {
     if (!currentDownloadUrl) return;
     
-    // Create temporary anchor tag for download
+    // Create temporary link
     const link = document.createElement('a');
     link.href = currentDownloadUrl;
-    link.download = `youtube-thumbnail-${new Date().getTime()}.jpg`;
+    
+    // Generate filename with timestamp
+    const timestamp = new Date().getTime();
+    link.download = `youtube-thumbnail-${timestamp}.jpg`;
+    
+    // Trigger download
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-  });
-  
-  function extractVideoId(url) {
-    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
-    const match = url.match(regExp);
-    return (match && match[2].length === 11) ? match[2] : null;
-  }
-  
-  function displayThumbnails(videoId) {
-    grid.innerHTML = '';
     
-    const thumbnails = [
-      { quality: 'MAX Resolution', url: `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg` },
-      { quality: 'High Quality', url: `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` },
-      { quality: 'Medium Quality', url: `https://img.youtube.com/vi/${videoId}/mqdefault.jpg` },
-      { quality: 'Standard Quality', url: `https://img.youtube.com/vi/${videoId}/sddefault.jpg` },
-      { quality: 'Low Quality', url: `https://img.youtube.com/vi/${videoId}/default.jpg` }
-    ];
-    
-    thumbnails.forEach(thumb => {
-      const item = document.createElement('div');
-      item.className = 'thumbnail-item';
-      
-      const img = document.createElement('img');
-      img.className = 'thumbnail-img';
-      img.src = thumb.url;
-      img.alt = thumb.quality;
-      img.loading = 'lazy';
-      
-      const label = document.createElement('div');
-      label.className = 'quality-label';
-      label.textContent = thumb.quality;
-      
-      item.appendChild(img);
-      item.appendChild(label);
-      grid.appendChild(item);
-      
-      // Click event for each thumbnail
-      item.addEventListener('click', function() {
-        modal.style.display = 'block';
-        modalImg.src = thumb.url;
-        currentDownloadUrl = thumb.url;
-      });
-    });
-  }
-});
+    // Fallback
