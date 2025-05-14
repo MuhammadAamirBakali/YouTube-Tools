@@ -4,6 +4,30 @@
   margin: 0 auto;
   padding: 20px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+}
+
+/* Tool Title */
+.tool-title {
+  font-family: 'Golos Text', sans-serif;
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+}
+
+.youtube-red {
+  color: #FF0000;
+  font-weight: 700;
+}
+
+/* Disclaimer Note */
+.disclaimer-note {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 25px;
+  font-style: italic;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  padding: 8px 0;
 }
 
 /* Input Section */
@@ -11,6 +35,9 @@
   display: flex;
   gap: 10px;
   margin-bottom: 20px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #yt-url {
@@ -38,6 +65,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: 20px;
+  margin-top: 30px;
 }
 
 .thumbnail-item {
@@ -92,20 +120,43 @@
   cursor: pointer;
 }
 
+/* Download Container */
+.download-container {
+  position: fixed;
+  bottom: 30px;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
 .download-button {
-  display: inline-block;
-  margin: 20px auto;
   background: #FF0000;
   color: white;
   padding: 12px 25px;
+  border: none;
   border-radius: 6px;
-  text-decoration: none;
   font-weight: bold;
   font-size: 18px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.download-icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='white' viewBox='0 0 24 24'%3E%3Cpath d='M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  .tool-title {
+    font-size: 1.8rem;
+  }
+  
   .input-group {
     flex-direction: column;
   }
@@ -120,5 +171,9 @@
   
   .modal-content {
     max-width: 95vw;
+  }
+  
+  .download-container {
+    bottom: 20px;
   }
 }
