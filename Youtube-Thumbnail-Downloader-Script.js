@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-  // Get all elements
   const getBtn = document.getElementById('get-thumbnail');
   const urlInput = document.getElementById('yt-url');
   const grid = document.querySelector('.thumbnails-grid');
@@ -10,17 +9,9 @@ document.addEventListener('DOMContentLoaded', function() {
   
   let currentDownloadUrl = '';
 
-  // Debugging: Check if elements exist
-  console.log('Get Button:', getBtn);
-  console.log('URL Input:', urlInput);
-  console.log('Grid:', grid);
-
-  // Get thumbnails function - FIXED VERSION
+  // Get thumbnails function
   getBtn.addEventListener('click', function() {
-    console.log('Button clicked!'); // Debug log
-    
     const url = urlInput.value.trim();
-    console.log('URL entered:', url); // Debug log
     
     if (!url) {
       alert('Please enter a YouTube URL');
@@ -28,8 +19,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     const videoId = extractVideoId(url);
-    console.log('Extracted Video ID:', videoId); // Debug log
-    
     if (!videoId) {
       alert('Invalid YouTube URL. Please check and try again.');
       return;
@@ -38,19 +27,39 @@ document.addEventListener('DOMContentLoaded', function() {
     displayThumbnails(videoId);
   });
 
-  // Rest of the code remains same as previous working version...
-  // [Keep all other functions exactly as they were]
-  
+  // Close modal
+  closeBtn.addEventListener('click', function() {
+    modal.style.display = 'none';
+  });
+
+  // Click outside image to close
+  window.addEventListener('click', function(e) {
+    if (e.target === modal) {
+      modal.style.display = 'none';
+    }
+  });
+
+  // Download button functionality
+  downloadBtn.addEventListener('click', function() {
+    if (!currentDownloadUrl) return;
+    
+    // Create temporary link
+    const link = document.createElement('a');
+    link.href = currentDownloadUrl;
+    link.download = `youtube-thumbnail-${new Date().getTime()}.jpg`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  });
+
   function extractVideoId(url) {
-    // Improved URL matching
     const regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
     const match = url.match(regExp);
     return (match && match[2].length === 11) ? match[2] : null;
   }
 
   function displayThumbnails(videoId) {
-    console.log('Displaying thumbnails for:', videoId); // Debug log
-    grid.innerHTML = '<div class="loading">Loading thumbnails...</div>';
+    grid.innerHTML = '';
     
     const thumbnails = [
       { quality: 'MAX Resolution', url: `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg` },
@@ -60,39 +69,30 @@ document.addEventListener('DOMContentLoaded', function() {
       { quality: 'Low Quality', url: `https://img.youtube.com/vi/${videoId}/default.jpg` }
     ];
     
-    // Clear loading message
-    grid.innerHTML = '';
-    
     thumbnails.forEach(thumb => {
-      const img = new Image();
-      img.src = thumb.url;
-      img.onload = function() {
-        const item = document.createElement('div');
-        item.className = 'thumbnail-item';
-        
-        img.className = 'thumbnail-img';
-        img.alt = thumb.quality;
-        img.loading = 'lazy';
-        
-        const label = document.createElement('div');
-        label.className = 'quality-label';
-        label.textContent = thumb.quality;
-        
-        item.appendChild(img.cloneNode());
-        item.appendChild(label);
-        grid.appendChild(item);
-        
-        // Click event for each thumbnail
-        item.addEventListener('click', function() {
-          modal.style.display = 'block';
-          modalImg.src = thumb.url;
-          currentDownloadUrl = thumb.url;
-        });
-      };
+      const item = document.createElement('div');
+      item.className = 'thumbnail-item';
       
-      img.onerror = function() {
-        console.log('Failed to load:', thumb.url);
-      };
+      const img = document.createElement('img');
+      img.className = 'thumbnail-img';
+      img.src = thumb.url;
+      img.alt = thumb.quality;
+      img.loading = 'lazy';
+      
+      const label = document.createElement('div');
+      label.className = 'quality-label';
+      label.textContent = thumb.quality;
+      
+      item.appendChild(img);
+      item.appendChild(label);
+      grid.appendChild(item);
+      
+      // Click event for each thumbnail
+      item.addEventListener('click', function() {
+        modal.style.display = 'block';
+        modalImg.src = thumb.url;
+        currentDownloadUrl = thumb.url;
+      });
     });
   }
-});
+}); 
