@@ -1,23 +1,50 @@
-body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    padding: 20px;
-    background-color: #f9f9f9;
+.yt-thumbnail-downloader {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
 }
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+
+#yt-url {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }
-#result img {
-    max-width: 100%;
-    border: 1px solid #ddd;
-    margin-top: 20px;
+
+#get-thumbnail {
+  background: #ff0000;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: bold;
 }
-#download-btn {
-    background: #ff0000;
-    color: white;
+
+.thumbnails-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.thumbnails-container img {
+  width: 100%;
+  border: 1px solid #eee;
+  border-radius: 4px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .yt-thumbnail-downloader {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .thumbnails-container {
+    grid-template-columns: 1fr;
+  }
 }
