@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   
   // Click outside image to close
-  modal.addEventListener('click', function(e) {
+  window.addEventListener('click', function(e) {
     if (e.target === modal) {
       modal.style.display = 'none';
     }
@@ -47,31 +47,11 @@ document.addEventListener('DOMContentLoaded', function() {
     grid.innerHTML = '';
     
     const thumbnails = [
-      {
-        quality: 'MAX Resolution',
-        url: `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`,
-        type: 'maxresdefault'
-      },
-      {
-        quality: 'High Quality',
-        url: `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`,
-        type: 'hqdefault'
-      },
-      {
-        quality: 'Medium Quality',
-        url: `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`,
-        type: 'mqdefault'
-      },
-      {
-        quality: 'Standard Quality',
-        url: `https://img.youtube.com/vi/${videoId}/sddefault.jpg`,
-        type: 'sddefault'
-      },
-      {
-        quality: 'Low Quality',
-        url: `https://img.youtube.com/vi/${videoId}/default.jpg`,
-        type: 'default'
-      }
+      { quality: 'MAX Resolution', url: `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg` },
+      { quality: 'High Quality', url: `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` },
+      { quality: 'Medium Quality', url: `https://img.youtube.com/vi/${videoId}/mqdefault.jpg` },
+      { quality: 'Standard Quality', url: `https://img.youtube.com/vi/${videoId}/sddefault.jpg` },
+      { quality: 'Low Quality', url: `https://img.youtube.com/vi/${videoId}/default.jpg` }
     ];
     
     thumbnails.forEach(thumb => {
@@ -97,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
         modal.style.display = 'block';
         modalImg.src = thumb.url;
         downloadBtn.href = thumb.url;
-        downloadBtn.download = `youtube-thumbnail-${videoId}-${thumb.type}.jpg`;
+        downloadBtn.download = `youtube-thumb-${videoId}-${thumb.quality.replace(' ', '-')}.jpg`;
       });
     });
   }
