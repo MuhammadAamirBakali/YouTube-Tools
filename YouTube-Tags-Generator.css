@@ -1,0 +1,144 @@
+<style>
+/* Font & Container */
+.youtube-tag-container {
+  max-width: 850px;
+  margin: 0 auto;
+  font-family: 'Golos Text', sans-serif;
+  padding: 15px;
+}
+
+/* Main Card */
+.tag-generator-card {
+  background: gray;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+/* Titles */
+.tag-generator-title {
+  color: #ff0000;
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  text-align: center;
+  font-family: 'Golos Text', sans-serif;
+}
+
+.tag-generator-subtitle {
+  color: #01110;
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 16px;
+}
+
+/* Input Box */
+.tag-input {
+  width: 100%;
+  min-height: 120px;
+  padding: 15px;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  font-family: 'Golos Text', sans-serif;
+  font-size: 16px;
+  resize: none;
+  box-sizing: border-box;
+}
+
+/* Generate Button */
+.generate-button {
+  background: #FF0000;
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 15px;
+  box-sizing: border-box;
+}
+
+/* Results Section */
+.results-container {
+  margin-top: 30px;
+  display: none;
+}
+
+.tags-header {
+  margin-bottom: 15px;
+}
+
+/* MOVED BUTTONS CONTAINER STYLES */
+.tag-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.copy-button, .reset-button {
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  flex: 1;
+  min-width: 120px;
+  box-sizing: border-box;
+}
+
+.copy-button {
+  background: #4285F4;
+  color: white;
+}
+
+.reset-button {
+  background: #e2e8f0;
+  color: #2d3748;
+}
+
+/* Tags Output Box */
+.tags-output {
+  background: #101112;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 20px;
+  min-height: 60px;
+  font-family: 'Golos Text', sans-serif;
+  word-break: break-word;
+}
+
+/* Loading Animation */
+.loading-spinner {
+  display: none;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255,255,255,0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+  margin-left: 10px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+  .tag-generator-card {
+    padding: 20px;
+  }
+  
+  .tag-actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .copy-button, .reset-button {
+    width: 100%;
+  }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+</style>
