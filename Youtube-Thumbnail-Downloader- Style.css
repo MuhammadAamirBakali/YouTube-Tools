@@ -1,24 +1,28 @@
-/* Main Container */
+/* Reset for Tool Container Only */
 .yt-thumbnail-downloader {
+  all: initial; /* Sab parent styles ko reset */
+  display: block;
   max-width: 1000px;
-  margin: 0 auto;
+  margin: 20px auto;
   padding: 20px;
   font-family: 'Golos Text', sans-serif;
   text-align: center;
+  background: white !important; /* Force white background */
+  box-sizing: border-box;
 }
 
 /* Tool Title */
-.tool-title {
-  font-family: 'Golos Text', sans-serif;
-  font-size: 1.0rem;
+.yt-thumbnail-downloader .tool-title {
+  font-size: 1.8rem;
   margin-bottom: 15px;
   font-weight: 600;
   color: #FF0000;
   text-align: center;
+  font-family: 'Golos Text', sans-serif;
 }
 
 /* Disclaimer Note */
-.disclaimer-note {
+.yt-thumbnail-downloader .disclaimer-note {
   font-size: 0.9rem;
   color: #666;
   margin-bottom: 25px;
@@ -31,7 +35,7 @@
 }
 
 /* Input Section */
-.input-group {
+.yt-thumbnail-downloader .input-group {
   display: flex;
   gap: 10px;
   margin-bottom: 20px;
@@ -40,16 +44,17 @@
   margin-right: auto;
 }
 
-#yt-url {
+.yt-thumbnail-downloader #yt-url {
   flex: 1;
   padding: 12px;
   border: 2px solid #e1e1e1;
   border-radius: 6px;
   font-size: 16px;
   font-family: 'Golos Text', sans-serif;
+  background: white;
 }
 
-#get-thumbnail {
+.yt-thumbnail-downloader #get-thumbnail {
   background: #FF0000;
   color: white;
   border: none;
@@ -62,42 +67,44 @@
   font-family: 'Golos Text', sans-serif;
 }
 
-#get-thumbnail:hover {
+.yt-thumbnail-downloader #get-thumbnail:hover {
   background: #CC0000;
 }
 
 /* Thumbnails Grid */
-.thumbnails-grid {
+.yt-thumbnail-downloader .thumbnails-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: 20px;
   margin-top: 30px;
 }
 
-.thumbnail-item {
+.yt-thumbnail-downloader .thumbnail-item {
   border: 1px solid #ddd;
   border-radius: 8px;
   overflow: hidden;
   transition: transform 0.3s;
   cursor: pointer;
+  background: white;
 }
 
-.thumbnail-img {
+.yt-thumbnail-downloader .thumbnail-img {
   width: 100%;
   height: auto;
   display: block;
 }
 
-.quality-label {
+.yt-thumbnail-downloader .quality-label {
   padding: 8px;
   text-align: center;
-  background: #000000;
+  background: #000;
+  color: white;
   font-weight: bold;
   font-family: 'Golos Text', sans-serif;
 }
 
 /* Modal Styles */
-.modal {
+.yt-thumbnail-downloader .modal {
   display: none;
   position: fixed;
   z-index: 1000;
@@ -106,10 +113,9 @@
   width: 100%;
   height: 100%;
   background-color: rgba(0,0,0,0.9);
-  text-align: center;
 }
 
-.modal-content {
+.yt-thumbnail-downloader .modal-content {
   max-height: 70vh;
   max-width: 90vw;
   margin-top: 5vh;
@@ -117,7 +123,7 @@
   box-shadow: 0 0 20px rgba(0,0,0,0.5);
 }
 
-.close {
+.yt-thumbnail-downloader .close {
   position: absolute;
   top: 20px;
   right: 30px;
@@ -128,7 +134,7 @@
 }
 
 /* Download Container */
-.download-container {
+.yt-thumbnail-downloader .download-container {
   position: fixed;
   bottom: 30px;
   left: 0;
@@ -136,7 +142,7 @@
   text-align: center;
 }
 
-.download-button {
+.yt-thumbnail-downloader .download-button {
   background: #FF0000;
   color: white;
   padding: 12px 25px;
@@ -149,41 +155,48 @@
   transition: all 0.3s;
 }
 
-.download-button:hover {
+.yt-thumbnail-downloader .download-button:hover {
   background: #CC0000;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .tool-title {
+  .yt-thumbnail-downloader .tool-title {
     font-size: 1.8rem;
   }
   
-  .input-group {
+  .yt-thumbnail-downloader .input-group {
     flex-direction: column;
   }
   
-  #get-thumbnail {
+  .yt-thumbnail-downloader #get-thumbnail {
     padding: 12px;
     width: 100%;
   }
   
-  .thumbnails-grid {
+  .yt-thumbnail-downloader .thumbnails-grid {
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 15px;
   }
   
-  .modal-content {
+  .yt-thumbnail-downloader .modal-content {
     max-width: 95vw;
     max-height: 60vh;
   }
   
-  .download-container {
+  .yt-thumbnail-downloader .download-container {
     bottom: 20px;
   }
   
-  .download-button {
+  .yt-thumbnail-downloader .download-button {
     padding: 10px 20px;
     font-size: 16px;
   }
+}
+
+/* Extra Isolation */
+.yt-thumbnail-downloader * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
