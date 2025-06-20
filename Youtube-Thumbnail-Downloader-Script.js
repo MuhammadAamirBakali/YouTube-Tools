@@ -1,102 +1,85 @@
 jQuery(document).ready(function($) {
-  // Elements
-  const $downloadBtn = $('#downloadBtn');
-  const $resetBtn = $('#resetBtn');
-  const $urlInput = $('#youtubeUrl');
-  const $resultContainer = $('#thumbnailResult');
-  const $modal = $('#imageModal');
-  const $modalImg = $('#modalImage');
-  const $downloadImageBtn = $('#downloadImageBtn');
-  const $closeModal = $('.close');
+  // Debugging check
+  console.log("Tool JS Loaded!"); // Check in F12 console
   
-  let currentImageUrl = '';
-  
-  // Download thumbnails
-  $downloadBtn.click(function() {
-    const videoUrl = $urlInput.val().trim();
+  // Fix 1: Proper event binding
+  $(document).on('click', '#downloadBtn', function() {
+    console.log("Download button clicked"); // Debug
+    const videoUrl = $('#youtubeUrl').val().trim();
+    
     if (!videoUrl) {
-      alert('Please enter a YouTube URL');
+      showError("Please enter a YouTube URL");
       return;
     }
     
     const videoId = extractVideoId(videoUrl);
     if (!videoId) {
-      alert('Invalid YouTube URL. Example: https://youtu.be/VIDEO_ID');
+      showError("Invalid URL. Use format: https://youtu.be/VIDEO_ID");
       return;
     }
     
-    showThumbnails(videoId);
+    loadThumbnails(videoId);
   });
-  
-  // Reset tool
-  $resetBtn.click(function() {
-    $urlInput.val('');
-    $resultContainer.empty();
-  });
-  
-  // Extract YouTube video ID
+
+  // Fix 2: Better URL parsing
   function extractVideoId(url) {
-    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    // Works for all YouTube URL formats
+    const regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
     const match = url.match(regExp);
     return (match && match[2].length === 11) ? match[2] : null;
   }
-  
-  // Show all thumbnails
-  function showThumbnails(videoId) {
-    $resultContainer.empty();
+
+  // Fix 3: Reliable thumbnail loading
+  function loadThumbnails(videoId) {
+    $('#thumbnailResult').empty();
+    $('#errorMessage').hide();
     
     const qualities = [
-      { name: '4K Quality (3840x2160)', code: 'maxresdefault' },
-      { name: 'Max Quality (1280x720)', code: 'hqdefault' },
-      { name: 'High Quality (480x360)', code: 'mqdefault' },
-      { name: 'Standard Quality (320x180)', code: 'sddefault' },
-      { name: 'Medium Quality (120x90)', code: '0' },
-      { name: 'Low Quality (60x45)', code: '1' }
+      { name: '4K Quality', code: 'maxresdefault' },
+      { name: 'HD Quality', code: 'hqdefault' },
+      { name: 'SD Quality', code: 'sddefault' },
+      { name: 'Medium Quality', code: 'mqdefault' }
     ];
-    
-    qualities.forEach(quality => {
-      const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/${quality.code}.jpg`;
+
+    qualities.forEach(q => {
+      const imgUrl = `https://img.youtube.com/vi/${videoId}/${q.code}.jpg`;
+      const $thumb = $(`
+        <div class="thumbnail-item">
+          <img src="${imgUrl}" class="thumbnail-img" data-url="${imgUrl}">
+          <div class="quality-label">${q.name}</div>
+        </div>
+      `).appendTo('#thumbnailResult');
       
-      const $thumbnailItem = $('<div>').addClass('thumbnail-item');
-      const $img = $('<img>').addClass('thumbnail-img').attr({
-        src: thumbnailUrl,
-        alt: quality.name,
-        'data-quality': quality.code
-      });
-      const $label = $('<div>').addClass('quality-label').text(quality.name);
-      
-      $thumbnailItem.append($img, $label).appendTo($resultContainer);
-      
-      // Click to enlarge
-      $img.click(function() {
-        currentImageUrl = thumbnailUrl;
-        $modalImg.attr('src', thumbnailUrl);
-        $modal.css('display', 'block');
+      // Click to preview
+      $thumb.click(function() {
+        $('#modalImage').attr('src', imgUrl);
+        $('#imageModal').show();
       });
     });
   }
-  
-  // Download image
-  $downloadImageBtn.click(function() {
-    if (!currentImageUrl) return;
-    
+
+  // Fix 4: Error handling
+  function showError(msg) {
+    $('#errorMessage').text(msg).show();
+    setTimeout(() => $('#errorMessage').fadeOut(), 3000);
+  }
+
+  // Reset function
+  $('#resetBtn').click(function() {
+    $('#youtubeUrl').val('');
+    $('#thumbnailResult').empty();
+    $('#errorMessage').hide();
+  });
+
+  // Modal controls
+  $('.close').click(() => $('#imageModal').hide());
+  $(window).click(e => e.target === $('#imageModal')[0] ? $('#imageModal').hide() : null);
+  $('#downloadImageBtn').click(function() {
     const link = document.createElement('a');
-    link.href = currentImageUrl;
-    link.download = `youtube-thumbnail-${new Date().getTime()}.jpg`;
+    link.href = $('#modalImage').attr('src');
+    link.download = 'youtube-thumbnail.jpg';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-  });
-  
-  // Close modal
-  $closeModal.click(function() {
-    $modal.css('display', 'none');
-  });
-  
-  // Close when clicking outside
-  $(window).click(function(e) {
-    if (e.target === $modal[0]) {
-      $modal.css('display', 'none');
-    }
   });
 });
