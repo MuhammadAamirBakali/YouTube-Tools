@@ -1,29 +1,96 @@
 /* Main Container */
-.yt-thumbnail-downloader {
+.thumbnail-downloader {
   max-width: 1000px;
   margin: 0 auto;
   padding: 20px;
-  font-family: 'Golos Text', sans-serif;
-  text-align: center;
-  background: white; /* Explicit white background */
-  isolation: isolate; /* New property to contain styles */
+  font-family: 'Segoe UI', sans-serif;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-/* Add this new rule to prevent leaks */
-.yt-thumbnail-downloader * {
-  all: unset; /* Reset only inside tool */
-  box-sizing: border-box;
-}
-
-/* Rest of your original CSS without any .yt-thumbnail-downloader prefixes */
-.tool-title {
-  font-size: 1.8rem;
-  margin-bottom: 15px;
+/* Title */
+.thumbnail-downloader h1 {
   color: #FF0000;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-/* ... (baqi ka aapka original CSS exactly copy-paste karein) ... */
+/* Input Section */
+.input-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
 
+#youtubeUrl {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+#downloadBtn {
+  background: #FF0000;
+  color: white;
+  border: none;
+  padding: 0 25px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+#downloadBtn:hover {
+  background: #CC0000;
+}
+
+/* Thumbnails Grid */
+.thumbnails-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.thumbnail-item {
+  border: 1px solid #eee;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.thumbnail-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.quality-label {
+  padding: 8px;
+  background: #333;
+  color: white;
+  text-align: center;
+  font-size: 14px;
+}
+
+/* Disclaimer */
+.disclaimer-note {
+  font-size: 12px;
+  color: #666;
+  text-align: center;
+  margin-top: 30px;
+  font-style: italic;
+}
+
+/* Mobile Responsive */
 @media (max-width: 768px) {
-  /* Your original media queries */
+  .input-container {
+    flex-direction: column;
+  }
+  
+  #downloadBtn {
+    width: 100%;
+    padding: 12px;
+  }
 }
