@@ -1,0 +1,158 @@
+<style>
+/* ===== HEADING STYLES ===== */
+.tool-main-heading {
+    color: #D72877 !important;
+    font-weight: 700;
+    font-size: 28px;
+    margin: 0 0 15px 0;
+    padding: 0 10px;
+    line-height: 1.3;
+    text-align: center;
+}
+
+.tool-description {
+    color: #F54C2D !important;
+    font-size: 16px;
+    margin-bottom: 25px;
+}
+
+/* ===== MAIN CONTAINER ===== */
+.youtube-thumbnail-downloader {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 25px 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    background-color: transparent;
+}
+
+/* ===== INPUT SECTION ===== */
+.url-input {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    border: 2px solid #D72877;
+    border-radius: 5px;
+    font-size: 16px;
+    background: #fff;
+}
+
+/* ===== BUTTONS ===== */
+.YouTube-Thumbnail-Download-Button {
+    background-color: #D72877;
+    color: white !important;
+    border: none;
+    padding: 12px 25px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-right: 10px;
+}
+
+.reset-button {
+    background-color: #333;
+    color: white !important;
+    border: none;
+    padding: 12px 25px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+/* ===== RESULTS SECTION ===== */
+.results-container {
+    margin-top: 30px;
+    background: transparent;
+}
+
+.qualities-heading {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.thumbnails-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+/* ===== THUMBNAIL ITEMS ===== */
+.thumbnail-item {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    transition: transform 0.3s;
+    cursor: pointer;
+    background: #fff;
+}
+
+.thumbnail-quality {
+    background-color: #D72877;
+    color: white;
+    padding: 8px;
+    font-size: 14px;
+}
+
+.download-btn {
+    display: block;
+    background-color: #F54C2D;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    text-decoration: none;
+}
+
+/* ===== UTILITY CLASSES ===== */
+.hidden {
+    display: none;
+}
+
+/* ===== RESPONSIVE STYLES ===== */
+@media (max-width: 1024px) {
+    .tool-main-heading {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 768px) {
+    .tool-main-heading {
+        font-size: 22px;
+    }
+    
+    .tool-description {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 600px) {
+    .youtube-thumbnail-downloader {
+        padding: 20px 15px;
+    }
+    
+    .tool-main-heading {
+        font-size: 20px;
+    }
+    
+    .thumbnails-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .YouTube-Thumbnail-Download-Button,
+    .reset-button {
+        width: 100%;
+        margin: 5px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .tool-main-heading {
+        font-size: 18px;
+    }
+    
+    .tool-description {
+        font-size: 14px;
+    }
+}
+</style>
