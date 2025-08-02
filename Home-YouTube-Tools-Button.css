@@ -33,7 +33,7 @@
   margin-bottom: 5px;
 }
 
-.tool-button h2 {
+.tool-button h3 {
   font-weight: 400;
   margin: 0;
   font-size: clamp(14px, 2vw, 18px);
